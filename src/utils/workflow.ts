@@ -1,13 +1,15 @@
 import { access, constants, copyFile, mkdir } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const WORKFLOW_PATH = ".github/workflows/voxset.yaml";
 
 function getExampleWorkflowPath(): string {
     const currentFile = fileURLToPath(import.meta.url);
-    const rootDir = join(dirname(currentFile), "../..");
-    return join(rootDir, "examples/deploy.yml");
+    const currentDir = dirname(currentFile);
+    const isSrcDir = currentDir.includes("src");
+    const packageRoot = isSrcDir ? resolve(currentDir, "../..") : resolve(currentDir, "..");
+    return join(packageRoot, "examples/deploy.yml");
 }
 
 export async function workflowExists(): Promise<boolean> {
