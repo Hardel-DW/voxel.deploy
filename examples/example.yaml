@@ -1,0 +1,58 @@
+project:
+  version: "1.1.4"              # Current project version, auto-incremented by the workflow
+  name: NE+ Addons - Structure  # Base display name version used in CurseForge (Not the filename) e.g "NE+ Addons - Structure - V1.1.0"
+  filename: NeoEnchantAddon-Structure  # Base filename for the built datapack zip. e.g "NeoEnchantAddon-Structure-1.1.0.zip"
+
+modrinth:
+  enabled: true        # Toggle Modrinth upload
+  project_id: bHyNNNwZ # Modrinth project ID for API uploads format "AABBCCDD"
+  featured: false      # Whether to mark the version as featured on Modrinth (Prefer to keep it false)
+
+curseforge:
+  datapack:
+    enabled: false     # Toggle CurseForge datapack upload
+    project_id: null   # CurseForge datapack project ID format "00000000"
+  
+  mod:
+    enabled: true      # Toggle CurseForge mod upload
+    project_id: 1300883  # CurseForge mod project ID format "00000000"
+    java_versions:     # Java versions to tag in CurseForge metadata
+      - "Java 21"
+      - "Java 22"
+    environments:      # Environment tags for CurseForge (client/server)
+      - server
+
+package_as_mod:
+  enabled: true        # Toggle datapack-to-mod conversion using @voxelio/converter, will upload a second version on Modrinth and for CurseForge it will use the curseforge.mod section.
+  loaders:             # Default mod loaders for conversion
+    - fabric
+    - forge
+    - neoforge
+    - quilt
+  id: mr_nneoenchant_addonsstructure  # Mod ID used in fabric.mod.json/mods.toml and other mod metadata
+  filename: NeoEnchantAddon-Structure  # Base filename for the built mod jar (If you want a different filename between zip and jar, you can change it here)
+  authors:             # Author list for mod metadata
+    - Hardel
+    - VoxelTeam
+  homepage: https://modrinth.com/datapack/nneoenchant-addons-structure  # Homepage URL in mod metadata
+  issues: https://github.com/Hardel-DW/NeoEnchantAddons-Structure/issues  # Issues URL in mod metadata
+  sources: https://github.com/Hardel-DW/NeoEnchantAddons-Structure  # Source URL in mod metadata
+
+build:
+  exclude:             # Files/patterns to exclude when copying to build the zip and jar, .changeset and deploy.yaml is mandatory else the workflow will fail.
+    - .git
+    - .github
+    - .changeset
+    - .vscode
+    - .cursor
+    - node_modules
+    - README.md
+    - .gitignore
+    - deploy.yaml
+    - package.json
+    - package-lock.json
+    - tsconfig.json
+    - .editorconfig
+    - '*.log'
+    - '*.tmp'
+    - .DS_Store

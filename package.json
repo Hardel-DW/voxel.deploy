@@ -1,0 +1,45 @@
+{
+    "name": "@voxelio/deploy",
+    "version": "0.1.0",
+    "type": "module",
+    "license": "MIT",
+    "description": "CLI tool for deploying datapacks to Modrinth and CurseForge",
+    "author": "Hardel",
+    "scripts": {
+        "build": "tsdown",
+        "build:watch": "tsdown --watch",
+        "lint": "tsc --noEmit",
+        "biome:format": "biome format --write .",
+        "biome:check": "biome check .",
+        "biome:unsafefix": "biome check --write --unsafe .",
+        "dev": "tsx src/cli.ts"
+    },
+    "bin": {
+        "voxset": "./dist/cli.js"
+    },
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
+        }
+    },
+    "files": [
+        "dist",
+        "examples"
+    ],
+    "engines": {
+        "node": ">=22.0.0"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^2.2.6",
+        "@types/node": "^22.18.10",
+        "tsdown": "^0.15.7",
+        "tsx": "^4.20.6",
+        "typescript": "^5.9.3"
+    },
+    "dependencies": {
+        "@clack/prompts": "^0.11.0",
+        "arktype": "^2.1.23",
+        "yaml": "^2.8.1"
+    }
+}
