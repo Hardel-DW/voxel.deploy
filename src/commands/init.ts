@@ -34,7 +34,7 @@ export async function init(): Promise<void> {
     const isDatapack = await isValidDatapack();
     if (!isDatapack) {
         clack.log.error(
-            "The current directory is not a valid datapack. Check that there is a pack.mcmeta file with a 'description' and 'pack_format' field."
+            "The current directory is not a valid datapack. Check that there is a pack.mcmeta file with a 'description' field."
         );
         process.exit(1);
     }

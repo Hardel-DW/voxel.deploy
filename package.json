@@ -1,6 +1,6 @@
 {
     "name": "@voxelio/deploy",
-    "version": "1.0.2",
+    "version": "1.0.5",
     "type": "module",
     "license": "MIT",
     "description": "CLI tool for deploying datapacks to Modrinth and CurseForge",
