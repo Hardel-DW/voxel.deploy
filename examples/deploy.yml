@@ -73,28 +73,34 @@ jobs:
         run: |
           python - <<'EOF'
           import yaml, json, os
-          
+
           with open('deploy.yaml', 'r') as f:
               config = yaml.safe_load(f)
-          
+
+          modrinth = config.get('modrinth', {})
+          curseforge = config.get('curseforge', {})
+          cf_datapack = curseforge.get('datapack', {})
+          cf_mod = curseforge.get('mod', {})
+          package_as_mod = config.get('package_as_mod', {})
+
           with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
               f.write(f"current_version={config['project']['version']}\n")
               f.write(f"project_name={config['project']['name']}\n")
               f.write(f"project_filename={config['project']['filename']}\n")
-              f.write(f"modrinth_enabled={str(config['modrinth']['enabled']).lower()}\n")
-              f.write(f"modrinth_project_id={config['modrinth']['project_id']}\n")
-              f.write(f"modrinth_featured={str(config['modrinth'].get('featured', False)).lower()}\n")
-              f.write(f"curseforge_datapack_enabled={str(config['curseforge']['datapack']['enabled']).lower()}\n")
-              f.write(f"curseforge_datapack_id={config['curseforge']['datapack'].get('project_id', '')}\n")
-              f.write(f"curseforge_mod_enabled={str(config['curseforge']['mod']['enabled']).lower()}\n")
-              f.write(f"curseforge_mod_id={config['curseforge']['mod'].get('project_id', '')}\n")
-              f.write(f"curseforge_java_versions={json.dumps(config['curseforge']['mod'].get('java_versions', []))}\n")
-              f.write(f"curseforge_environments={json.dumps(config['curseforge']['mod'].get('environments', []))}\n")
-              f.write(f"package_as_mod_enabled={str(config['package_as_mod']['enabled']).lower()}\n")
-              f.write(f"package_as_mod_loaders={json.dumps(config['package_as_mod']['loaders'])}\n")
-              f.write(f"package_as_mod_id={config['package_as_mod']['id']}\n")
-              f.write(f"package_as_mod_filename={config['package_as_mod'].get('filename', config['package_as_mod']['id'])}\n")
-              f.write(f"package_as_mod_authors={json.dumps(config['package_as_mod']['authors'])}\n")
+              f.write(f"modrinth_enabled={str(modrinth.get('enabled', False)).lower()}\n")
+              f.write(f"modrinth_project_id={modrinth.get('project_id', '')}\n")
+              f.write(f"modrinth_featured={str(modrinth.get('featured', False)).lower()}\n")
+              f.write(f"curseforge_datapack_enabled={str(cf_datapack.get('enabled', False)).lower()}\n")
+              f.write(f"curseforge_datapack_id={cf_datapack.get('project_id', '')}\n")
+              f.write(f"curseforge_mod_enabled={str(cf_mod.get('enabled', False)).lower()}\n")
+              f.write(f"curseforge_mod_id={cf_mod.get('project_id', '')}\n")
+              f.write(f"curseforge_java_versions={json.dumps(cf_mod.get('java_versions', []))}\n")
+              f.write(f"curseforge_environments={json.dumps(cf_mod.get('environments', []))}\n")
+              f.write(f"package_as_mod_enabled={str(package_as_mod.get('enabled', False)).lower()}\n")
+              f.write(f"package_as_mod_loaders={json.dumps(package_as_mod.get('loaders', []))}\n")
+              f.write(f"package_as_mod_id={package_as_mod.get('id', '')}\n")
+              f.write(f"package_as_mod_filename={package_as_mod.get('filename', package_as_mod.get('id', ''))}\n")
+              f.write(f"package_as_mod_authors={json.dumps(package_as_mod.get('authors', []))}\n")
               f.write(f"exclude_patterns={json.dumps(config.get('build', {}).get('exclude', []))}\n")
           EOF
 
