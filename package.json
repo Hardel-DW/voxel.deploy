@@ -15,7 +15,7 @@
         "dev": "tsx src/cli.ts"
     },
     "bin": {
-        "voxset": "./dist/cli.js"
+        "voxset": "dist/cli.js"
     },
     "exports": {
         ".": {
